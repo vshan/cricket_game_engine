@@ -20,6 +20,17 @@ class Team
     for i in 0...@@no_of_players_in_team
       @team_players[i] = Player.new(@name_of_team)
     end
+    i = 0
+    CSV.foreach("..\data\#{@name_of_team.downcase}_cricket_team", headers: true, converters: :numeric) do |data|
+      @team_players[i].player_name = data["Player Name"]
+      @team_players[i].dominant_hand = data["Dominant Hand"]
+      @team_players[i].bowling_style = data["Bowling Style"]
+      @team_players[i].fielding_position = data["Fielding Position"]
+      @team_players[i].front_foot_skill = data["Front Foot Skill"]
+      @team_players[i].back_foot_skill = data["Back Foot Skill"]
+      @team_players[i].bowling_skill = data["Bowling Skill"]
+      i += 1
+    end
   end
 
 end

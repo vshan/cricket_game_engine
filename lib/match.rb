@@ -8,7 +8,7 @@ class Match
   end
 
   def intro
-    puts "Hello and welcome to the beatiful contest between the two great teams #{@self_team.caps} and #{@opponent_team.caps}!"
+    puts "Hello and welcome to the beatiful contest between the two great teams #{@self_team.upcase} and #{@opponent_team.upcase}!"
     toss
   end
 
