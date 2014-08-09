@@ -16,7 +16,7 @@ class Game
 
   def give_options
     puts "\nWhat would you like to do today?"
-    take_options_from_file_and_display("..\data\initial_options.txt", Array.new)    
+    take_options_from_file_and_display("..\data\initial_options.txt")    
   end
 
   def take_options
@@ -42,7 +42,7 @@ class Game
   end
 
   def display_teams
-    take_options_from_file_and_display("..\data\teams.txt", Array.new)
+    take_options_from_file_and_display("..\data\teams.txt")
   end
 end
 
