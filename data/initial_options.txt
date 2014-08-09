@@ -1,0 +1,3 @@
+Play a Quick Game
+Create A Player
+Play a Tournament

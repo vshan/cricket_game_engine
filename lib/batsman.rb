@@ -1,0 +1,3 @@
+class Batsman < Player
+	#...
+end

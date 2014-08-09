@@ -1,0 +1,3 @@
+class Fielder < Player
+	#...
+end
