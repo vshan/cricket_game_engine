@@ -1,5 +1,4 @@
 require 'securerandom'
-
 class Match
   @@no_of_balls_in_over = 6
   def initialize(team1, team2, no_of_overs)
@@ -34,16 +33,16 @@ class Match
       decision = gets.strip
       case decision
       when "bat"
-        bat(@self_team)
         bowl(@opponent_team)
+        bat(@self_team)
       else
         bowl(@self_team)
         bat(@opponent_team)
       end
     else
       if SecureRandom.random_number(1000) >= 500
-        bat(@opponent_team)
         bowl(@self_team)
+        bat(@opponent_team)
       else
         bowl(@opponent_team)
         bat(@self_team)
@@ -55,6 +54,7 @@ class Match
     @batting_team = team
     @strike_batsman = Batsman.new(team)
     @non_strike_batsman = Batsman.new(team)
+    initiate_play
   end
 
   def bowl(team)
@@ -111,10 +111,11 @@ class Match
     @strike_batsman.balls_played += 1
     @bowler.wickets += 1
     @strike_batsman.out
-    unless @bowling_team.wickets == 10
+    if @bowling_team.wickets != 10
       @strike_batsman = Batsman.new(batting_team)
     else
-      @batting_team.innings_over
+      change_innings
+    end
   end
 
   def update_score_by(runs)
@@ -142,13 +143,27 @@ class Match
       change_strike
       change_bowler
     end
+    change_innings
+  end
+
+  def Match.close
     write_to_file("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt")
   end
 
   def write_to_file
     #...
   end
+
+  def change_innings
+    @batting_team.innings_over
+    if have_both_teams_batted?
+      Match.close
+    else
+      @batting_team, @bowling_team = @bowling_team, @batting_team
+      bowl(@bowling_team)
+      bat(@batting_team)
+    end
+  end
 end
-# Overs[50] = [[1, 2, 3, "W", 4, 0, 6], [], ...]
-#
+
 
