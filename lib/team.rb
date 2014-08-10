@@ -1,12 +1,13 @@
 class Team
-
   attr_accessor :name_of_team
   attr_reader :team_id
+
+  @@no_of_players_in_team = 11
+  @@teams = take_options_from_file_return_array("..\data\teams.txt")
   
-  def initialize(team)
+  def initialize(team, team_type)
     @team_id = team
-    @@no_of_players_in_team = 11
-    @@teams = take_options_from_file_return_array("..\data\teams.txt")
+    @team_type = team_type
     set_name_of_team(@team_id)
     load(@team_id)
   end
@@ -33,4 +34,11 @@ class Team
     end
   end
 
+  def bat
+    @team_type == :self_team? puts "You're batting." : puts "You're bowling."
+  end
+
+  def bowl
+    @team_type == :self_team? puts "You're bowling." : puts "You're batting."
+  end
 end

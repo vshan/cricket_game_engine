@@ -1,5 +1,4 @@
 require_relative 'search.rb'
-
 class Game
   include Search
   @@game_name = "Cricket I58"
@@ -26,7 +25,7 @@ class Game
     when 1
       new_game
     when 2
-      Player.new(2) #option to make a new player
+      Player.new(" ",:new_player) #option to make a new player
     when 3
       Tournament.new
     else
@@ -35,10 +34,10 @@ class Game
   end
 
   def new_game
-    puts "Which two teams would you like to play with?"
+    puts "Which two teams would you like to play with and how many overs?"
     display_teams
-    team_1, team_2 = gets.split
-    Match.new(team_1, team_2)
+    team_1, team_2, no_of_overs = gets.split
+    Match.new(team_1, team_2, no_of_overs)
   end
 
   def display_teams
