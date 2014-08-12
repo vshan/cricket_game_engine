@@ -5,6 +5,7 @@ class Match
     @self_team = Team.new(team1, :self_team)
     @opponent_team = Team.new(team2, :opponent_team)
     @no_of_overs = no_of_overs
+    @overs_completed = 0
     intro
     toss
   end
@@ -68,13 +69,11 @@ class Match
       run_a_single
     when 2
       run_a_double
-    when 3
-      run_3_runs
     when 4
       hit_a_four
     when 6
       hit_a_six
-    when 'W'
+    when "W"
       wicket
     else 
       dot_ball
@@ -88,11 +87,6 @@ class Match
 
   def run_a_double
     update_score_by(2)
-  end
-
-  def run_3_runs
-    update_score_by(3)
-    change_strike
   end
 
   def hit_a_four
@@ -131,13 +125,14 @@ class Match
 
   def change_bowler
     @bowler.overs_bowled += 1
+    @overs_completed += 1
     @bowler = Bowler.new(bowling_team)
   end
 
   def initiate_play
     for i in 0...@no_of_overs
       for j in 0...@@no_of_balls_in_over
-        @overs[i][j] = Ball.new(@strike_batsman, @bowler)
+        @overs[i][j] = Ball.new(@strike_batsman, @bowler, @overs_completed, @no_of_overs)
         record(@overs[i][j])
       end
       change_strike
@@ -156,6 +151,7 @@ class Match
 
   def change_innings
     @batting_team.innings_over
+    @overs_completed = 0
     if have_both_teams_batted?
       Match.close
     else
