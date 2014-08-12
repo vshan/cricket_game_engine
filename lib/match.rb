@@ -82,23 +82,28 @@ class Match
 
   def run_a_single
     update_score_by(1)
+    @strike_batsman.ones += 1
     change_strike
   end
 
   def run_a_double
     update_score_by(2)
+    @strike_batsman.twos += 1
   end
 
   def hit_a_four
     update_score_by(4)
+    @strike_batsman.fours += 1
   end
 
   def hit_a_six
     update_score_by(6)
+    @strike_batsman.sixes += 1
   end
 
   def dot_ball
     @strike_batsman.balls_played += 1
+    @strike_batsman.dots += 1
   end
 
   def wicket
@@ -106,7 +111,7 @@ class Match
     @bowler.wickets += 1
     @strike_batsman.out
     if @bowling_team.wickets != 10
-      @strike_batsman = Batsman.new(batting_team)
+      @strike_batsman = Batsman.new(@batting_team)
     else
       change_innings
     end
@@ -115,7 +120,7 @@ class Match
   def update_score_by(runs)
     @strike_batsman.score += runs
     @strike_batsman.balls_played += 1
-    @strike_batsman.team_score += runs
+    @batting_team.team_score += runs
     @bowler.runs_conceded += runs
   end
 
@@ -126,7 +131,7 @@ class Match
   def change_bowler
     @bowler.overs_bowled += 1
     @overs_completed += 1
-    @bowler = Bowler.new(bowling_team)
+    @bowler = Bowler.new(@bowling_team)
   end
 
   def initiate_play
@@ -146,7 +151,9 @@ class Match
   end
 
   def write_to_file
-    #...
+    File.open("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt", "w") do |file|
+
+    end
   end
 
   def change_innings

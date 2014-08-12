@@ -3,7 +3,7 @@ class Team
   attr_reader :team_id
 
   @@no_of_players_in_team = 11
-  @@teams = take_options_from_file_return_array("..\data\teams.txt")
+  @@teams = take_options_from_file_return_array("../data/teams.txt")
   
   def initialize(team, team_type)
     @team_id = team
@@ -22,7 +22,7 @@ class Team
       @team_players[i] = Player.new(@name_of_team)
     end
     i = 0
-    CSV.foreach("..\data\#{@name_of_team.downcase}_cricket_team", headers: true, converters: :numeric) do |data|
+    CSV.foreach("../data/#{@name_of_team.downcase}_cricket_team", headers: true, converters: :numeric) do |data|
       @team_players[i].player_name = data["Player Name"]
       @team_players[i].dominant_hand = data["Dominant Hand"]
       @team_players[i].bowling_style = data["Bowling Style"]
