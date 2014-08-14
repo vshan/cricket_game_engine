@@ -150,9 +150,11 @@ class Match
     write_to_file("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt")
   end
 
-  def write_to_file
-    File.open("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt", "w") do |file|
-
+  def write_to_file(file)
+    File.open(file, "w") do |file|
+      file.puts "SCORECARD------------ #{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize}"
+      file.puts "#{@batting_team} innings:"
+      
     end
   end
 

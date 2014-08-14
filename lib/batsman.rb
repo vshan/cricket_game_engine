@@ -9,6 +9,7 @@ class Batsman < Player
   	@dots = 0
   	@twos = 0
   	@ones = 0
+  	
   end
 
   def out

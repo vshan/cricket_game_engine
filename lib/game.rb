@@ -1,9 +1,8 @@
 require_relative 'search.rb'
 class Game
   include Search
-  @@game_name = "Cricket I58"
-
-  def initialize
+  def initialize(name)
+    @@game_name = name
     introduce
     give_options
     take_options
@@ -25,7 +24,7 @@ class Game
     when 1
       new_game
     when 2
-      Player.new(" ",:new_player) #option to make a new player
+      Player.new(:new_player) #option to make a new player
     when 3
       Tournament.new
     else
