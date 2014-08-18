@@ -43,5 +43,3 @@ class Game
     take_options_from_file_and_display("../data/teams.txt")
   end
 end
-
-Game.new
