@@ -17,3 +17,5 @@ class Batsman < Player
   end
 
 end
+
+#add more functionality
