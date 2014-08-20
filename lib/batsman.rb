@@ -26,7 +26,11 @@ class Batsman < Player
   end
 
   def new_batsman(player)
-    
+    self.player_name = player.player_name
+    self.team_name = player.team_name
+    self.dominant_hand = player.dominant_hand
+    self.front_foot_skill = player.front_foot_skill
+    self.back_foot_skill = player.back_foot_skill
   end
 
 end
