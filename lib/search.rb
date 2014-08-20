@@ -10,5 +10,3 @@ module Search
     file_options.each_with_index { |option, index| puts "#{index + 1}: #{option}" }
   end
 end
-
-#add more options

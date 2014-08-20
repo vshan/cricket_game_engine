@@ -65,5 +65,3 @@ class Ball
     @@determine_probability.call wicket*bat_ball_prob(@batsman_skill, @bowler_skill), "W"
   end
 end
-
-#remember to add probabilities
