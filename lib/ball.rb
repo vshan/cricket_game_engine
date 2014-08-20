@@ -49,11 +49,11 @@ class Ball
   end
 
   def post_mid_phase
-    set_probability()
+    set_probability(0.2, 0.4, 0.6, 0.5, 0.2, 0.4)
   end
 
   def final_phase
-    set_probability()
+    set_probability(0.1, 0.3, 0.5, 0.6, 0.5, 0.5)
   end
 
   def set_probability(dot, one, two, four, six, wicket)

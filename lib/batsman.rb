@@ -1,5 +1,5 @@
 class Batsman < Player
-  attr_accessor :balls_played, :score, :fours, :sixes, :dots, :twos, :ones, :status
+  attr_accessor :balls_played, :score, :fours, :sixes, :dots, :twos, :ones
 
   def initialize(team)
   	@balls_played = 0
@@ -13,14 +13,16 @@ class Batsman < Player
     select_batsman(team)
   end
 
-  def out
-  	
+  def out(batters)
+  	batters.push(self)
   end
 
   def select_batsman(team)
     team.team_players.each do |player|
-      if player.status == :not_played
+      if player.bat_status == :not_played
         new_batsman(player)
+        player.bat_status = :played
+        break
       end
     end
   end
@@ -35,4 +37,4 @@ class Batsman < Player
 
 end
 
-# the three statuses are: playing, out, not_played
+# the two statuses are: played, not_played

@@ -1,6 +1,6 @@
 require 'securerandom'
 class Match
-  @@no_of_balls_in_over = 6
+  NO_OF_BALLS_IN_OVER = 6
   def initialize(team1, team2, no_of_overs)
     @self_team = Team.new(team1, :self_team)
     @opponent_team = Team.new(team2, :opponent_team)
@@ -52,6 +52,7 @@ class Match
   end
 
   def bat(team)
+    @batters = []
     @batting_team = team
     @strike_batsman = Batsman.new(team)
     @non_strike_batsman = Batsman.new(team)
@@ -59,6 +60,7 @@ class Match
   end
 
   def bowl(team)
+    @bowlers = []
     @bowling_team = team
     @bowler = Bowler.new(team)
   end
@@ -109,7 +111,7 @@ class Match
   def wicket
     @strike_batsman.balls_played += 1
     @bowler.wickets += 1
-    @strike_batsman.out
+    @strike_batsman.out(@batters)
     if @bowling_team.wickets != 10
       @strike_batsman = Batsman.new(@batting_team)
     else
@@ -136,7 +138,7 @@ class Match
 
   def initiate_play
     for i in 0...@no_of_overs
-      for j in 0...@@no_of_balls_in_over
+      for j in 0...NO_OF_BALLS_IN_OVER
         @overs[i][j] = Ball.new(@strike_batsman, @bowler, @overs_completed, @no_of_overs)
         record(@overs[i][j])
       end
@@ -146,7 +148,7 @@ class Match
     change_innings
   end
 
-  def Match.close
+  def match_innings_close
     write_to_file("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt")
   end
 
@@ -154,20 +156,23 @@ class Match
     File.open(file, "w") do |file|
       file.puts "SCORECARD------------ #{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize}"
       file.puts "#{@batting_team} innings:"
-      
+      @batters.each do |batsman|
+        file.puts "#{batsman.player_name.capitalize}: #{batsman.score} runs off #{batsman.balls_played} balls, consisting of #{batsman.fours} fours and #{batsman.sixes} sixes."
+      end
+      file.puts "\n\n"
+      @bowlers.each do |bowler|
+        file.puts "#{bowler.player_name}: #{bowler.wickets} wickets off #{bowler.overs_bowled} overs, conceding #{bowler.runs_conceded} runs."
+      end
     end
   end
 
   def change_innings
     @batting_team.innings_over
     @overs_completed = 0
-    if have_both_teams_batted?
-      Match.close
-    else
-      @batting_team, @bowling_team = @bowling_team, @batting_team
-      bowl(@bowling_team)
-      bat(@batting_team)
-    end
+    match_innings_close
+    @batting_team, @bowling_team = @bowling_team, @batting_team
+    bowl(@bowling_team)
+    bat(@batting_team)
   end
 end
 

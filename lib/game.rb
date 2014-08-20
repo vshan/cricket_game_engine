@@ -4,32 +4,11 @@ class Game
   def initialize(name)
     @@game_name = name
     introduce
-    give_options
-    take_options
+    new_game
   end
   
   def introduce
     puts "Hello and welcome to #{@@game_name}."
-  end
-
-  def give_options
-    puts "\nWhat would you like to do today?"
-    take_options_from_file_and_display("../data/initial_options.txt")    
-  end
-
-  def take_options
-    option = gets.to_i
-    #remember to raise exception whenever input not an integer
-    case option
-    when 1
-      new_game
-    when 2
-      Player.new(:new_player) #option to make a new player
-    when 3
-      Tournament.new
-    else
-      puts "Please enter a valid option."
-    end
   end
 
   def new_game
@@ -45,3 +24,23 @@ class Game
 end
 
 Game.new
+
+  # def give_options
+  #   puts "\nWhat would you like to do today?"
+  #   new_game
+  # end
+
+  # def take_options
+  #   option = gets.to_i
+  #   #remember to raise exception whenever input not an integer
+  #   case option
+  #   when 1
+  #     new_game
+  #   when 2
+  #     Player.new(:new_player) #option to make a new player
+  #   when 3
+  #     Tournament.new
+  #   else
+  #     puts "Please enter a valid option."
+  #   end
+  # end

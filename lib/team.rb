@@ -2,7 +2,7 @@ class Team
   attr_accessor :name_of_team
   attr_reader :team_id
 
-  @@no_of_players_in_team = 11
+  NO_OF_PLAYERS_IN_TEAM = 11
   @@teams = take_options_from_file_return_array("../data/teams.txt")
   
   def initialize(team, team_type)
@@ -18,7 +18,7 @@ class Team
 
   def load(team)
     @team_players = []
-    for i in 0...@@no_of_players_in_team
+    for i in 0...NO_OF_PLAYERS_IN_TEAM
       @team_players[i] = Player.new(@name_of_team)
     end
     i = 0
@@ -32,13 +32,5 @@ class Team
       @team_players[i].bowling_skill = data["Bowling Skill"]
       i += 1
     end
-  end
-
-  def bat
-    @team_type == :self_team? puts "You're batting." : puts "You're bowling."
-  end
-
-  def bowl
-    @team_type == :self_team? puts "You're bowling." : puts "You're batting."
   end
 end
