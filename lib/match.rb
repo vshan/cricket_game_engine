@@ -1,4 +1,12 @@
+$: << File.dirname(File.absolute_path(__FILE__))
+
 require 'securerandom'
+require 'team'
+require 'ball'
+require 'player'
+require 'batsman'
+require 'bowler'
+
 class Match
   NO_OF_BALLS_IN_OVER = 6
   def initialize(team1, team2, no_of_overs)
@@ -206,5 +214,3 @@ class Match
     puts "\n\nIt was a fun match for sure!"
   end
 end
-
-

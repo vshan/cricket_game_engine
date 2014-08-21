@@ -1,3 +1,8 @@
+$: << File.dirname(File.absolute_path(__FILE__))
+
+require 'player'
+require 'team'
+
 class Bowler < Player
   attr_accessor :overs_bowled, :wickets, :runs_conceded
 

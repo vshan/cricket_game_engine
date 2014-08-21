@@ -1,3 +1,8 @@
+$: << File.dirname(File.absolute_path(__FILE__))
+
+require 'player'
+require 'csv'
+
 class Team
   attr_accessor :name_of_team
   attr_reader :team_id

@@ -1,4 +1,8 @@
-require_relative 'search.rb'
+$: << File.dirname(File.absolute_path(__FILE__))
+
+require 'search'
+require 'match'
+
 class Game
   include Search
   def initialize(name)
@@ -22,25 +26,3 @@ class Game
     take_options_from_file_and_display("../data/teams.txt")
   end
 end
-
-Game.new
-
-  # def give_options
-  #   puts "\nWhat would you like to do today?"
-  #   new_game
-  # end
-
-  # def take_options
-  #   option = gets.to_i
-  #   #remember to raise exception whenever input not an integer
-  #   case option
-  #   when 1
-  #     new_game
-  #   when 2
-  #     Player.new(:new_player) #option to make a new player
-  #   when 3
-  #     Tournament.new
-  #   else
-  #     puts "Please enter a valid option."
-  #   end
-  # end

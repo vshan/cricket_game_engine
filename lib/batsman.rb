@@ -1,3 +1,8 @@
+$: << File.dirname(File.absolute_path(__FILE__))
+
+require 'player'
+require 'team'
+
 class Batsman < Player
   attr_accessor :balls_played, :score, :fours, :sixes, :dots, :twos, :ones
 
@@ -39,5 +44,3 @@ class Batsman < Player
     self.back_foot_skill = player.back_foot_skill
   end
 end
-
-# the two statuses are: played, not_played

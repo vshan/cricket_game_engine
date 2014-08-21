@@ -1,3 +1,9 @@
+$: << File.dirname(File.absolute_path(__FILE__))
+
+require 'securerandom'
+require 'batsman'
+require 'bowler'
+
 class Ball
   def initialize(batsman, bowler, overs, total_overs)
     @batsman = batsman
@@ -19,11 +25,11 @@ class Ball
   def determine_outcome
     if @overs < 0.2*@total_overs 
       initial_phase
-    elsif @overs >= 0.2*@total_overs && < 0.4*@total_overs
+    elsif @overs >= 0.2*@total_overs && @overs < 0.4*@total_overs
       mid_initial_phase
-    elsif @overs >= 0.4*@total_overs && < 0.6*@total_overs
+    elsif @overs >= 0.4*@total_overs && @overs < 0.6*@total_overs
       mid_phase
-    elsif @overs >= 0.6*@total_overs && overs < 0.8*@total_overs
+    elsif @overs >= 0.6*@total_overs && @overs < 0.8*@total_overs
       post_mid_phase
     else
       final_phase
