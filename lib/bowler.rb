@@ -1,9 +1,10 @@
 class Bowler < Player
-  attr_accessor :overs_bowled, :wickets
+  attr_accessor :overs_bowled, :wickets, :runs_conceded
 
   def initialize(team)
   	@overs_bowled = 0
     @wickets = 0
+    @runs_conceded = 0
 
   	select_bowler(team) 
   end
@@ -17,14 +18,14 @@ class Bowler < Player
   		if player.bowl_status == :not_played
         new_bowler(player)
         player.bowl_status = :played
-      elsif player.bowl_status == :bowling
-        new_bowler()
         break
       end 
   	end
   end
 
   def new_bowler(player)
-    
+    self.player_name = player.player_name
+    self.team_name = player.team_name
+    self.bowling_skill = player.bowling_skill
   end
 end

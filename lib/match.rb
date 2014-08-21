@@ -178,8 +178,8 @@ class Match
   def write_to_file(file)
     File.open(file, "w") do |file|
       file.puts "SCORECARD------------ #{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize}"
-      file.puts "#{@batting_team} innings:"
-      file.puts "#{@batting_team.team_score} runs scored by #{batting_team.capitalize}\n"
+      file.puts "#{@batting_team.name_of_team} innings:"
+      file.puts "#{@batting_team_score} runs scored by #{batting_team.name_of_team.capitalize}\n"
       @batters.each do |batsman|
         file.puts "#{batsman.player_name.capitalize}: #{batsman.score} runs off #{batsman.balls_played} balls, consisting of #{batsman.fours} fours and #{batsman.sixes} sixes."
       end
