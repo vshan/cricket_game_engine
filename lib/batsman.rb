@@ -38,7 +38,6 @@ class Batsman < Player
     self.front_foot_skill = player.front_foot_skill
     self.back_foot_skill = player.back_foot_skill
   end
-
 end
 
 # the two statuses are: played, not_played

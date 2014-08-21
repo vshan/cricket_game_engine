@@ -64,7 +64,8 @@ class Match
   def bowl(team)
     @bowlers = []
     @bowling_team = team
-    @bowler = Bowler.new(team)
+    @one_end_bowler = Bowler.new(team)
+    @other_end_bowler = Bowler.new(team)
   end
 
   def record(ball)
@@ -112,9 +113,9 @@ class Match
 
   def wicket
     @strike_batsman.balls_played += 1
-    @bowler.wickets += 1
+    @one_end_bowler.wickets += 1
     @strike_batsman.out(@batters)
-    if @bowling_team.wickets != 10
+    if @wickets_taken != 10
       @strike_batsman = Batsman.new(@batting_team)
     else
       change_innings
@@ -124,28 +125,42 @@ class Match
   def update_score_by(runs)
     @strike_batsman.score += runs
     @strike_batsman.balls_played += 1
-    @batting_team.team_score += runs
-    @bowler.runs_conceded += runs
+    @batting_team_score += runs
+    @one_end_bowler.runs_conceded += runs
   end
 
   def change_strike
     @strike_batsman, @non_strike_batsman = @non_strike_batsman, @strike_batsman
   end
 
+  def spell_over?
+    @one_end_bowler.overs_bowled == 0.2*@no_of_overs
+  end
+
+  def new_bowler(team)
+    @one_end_bowler.spell_completed(@bowlers)
+    @one_end_bowler = @other_end_bowler
+    @other_end_bowler = Bowler.new(@bowling_team)
+  end
+
   def change_bowler
-    @bowler.overs_bowled += 1
+    @one_end_bowler.overs_bowled += 1
+    @one_end_bowler, @other_end_bowler = @other_end_bowler, @one_end_bowler
     @overs_completed += 1
-    @bowler = Bowler.new(@bowling_team)
   end
 
   def initiate_play
     for i in 0...@no_of_overs
       for j in 0...NO_OF_BALLS_IN_OVER
-        @overs[i][j] = Ball.new(@strike_batsman, @bowler, @overs_completed, @no_of_overs)
+        @overs[i][j] = Ball.new(@strike_batsman, @one_end_bowler, @overs_completed, @no_of_overs)
         record(@overs[i][j])
       end
       change_strike
-      change_bowler
+      if spell_over? 
+        new_bowler
+      else 
+        change_bowler 
+      end
     end
     change_innings
   end
