@@ -7,7 +7,9 @@ class Bowler < Player
   	select_bowler(team) 
   end
 
-  def select_bowler
-  	
+  def select_bowler(team)
+  	team.team_players.each do |bowler|
+  		
+  	end
   end
 end
