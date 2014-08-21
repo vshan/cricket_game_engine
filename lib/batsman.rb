@@ -22,8 +22,8 @@ class Batsman < Player
   	batters.push(self)
   end
 
-  def not_out(baters)
-    batter.push(self)
+  def not_out(batters)
+    batters.push(self)
   end
 
   def select_batsman(team)

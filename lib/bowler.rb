@@ -14,7 +14,7 @@ class Bowler < Player
   	select_bowler(team) 
   end
 
-  def spell_complete(bowlers)
+  def spell_completed(bowlers)
     bowlers.push(self)
   end
 

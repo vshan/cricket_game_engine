@@ -2,6 +2,7 @@ $: << File.dirname(File.absolute_path(__FILE__))
 
 require 'search'
 require 'match'
+require 'team'
 
 class Game
   include Search
@@ -26,3 +27,5 @@ class Game
     take_options_from_file_and_display("../data/teams.txt")
   end
 end
+
+Game.new("CRICKET")

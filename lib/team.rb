@@ -1,17 +1,19 @@
 $: << File.dirname(File.absolute_path(__FILE__))
 
+require 'search'
 require 'player'
 require 'csv'
 
 class Team
-  attr_accessor :name_of_team
+  include Search
+  attr_accessor :name_of_team, :team_players
   attr_reader :team_id
 
   NO_OF_PLAYERS_IN_TEAM = 11
-  @@teams = take_options_from_file_return_array("../data/teams.txt")
   
   def initialize(team, team_type)
-    @team_id = team
+    @@teams = self.take_options_from_file_return_array("../data/teams.txt")
+    @team_id = team.to_i
     @team_type = team_type
     set_name_of_team(@team_id)
     load(@team_id)
@@ -27,7 +29,7 @@ class Team
       @team_players[i] = Player.new(@name_of_team)
     end
     i = 0
-    CSV.foreach("../data/#{@name_of_team.downcase}_cricket_team", headers: true, converters: :numeric) do |data|
+    CSV.foreach("../data/#{@name_of_team.chomp.downcase}_cricket_team.csv", headers: true, converters: :numeric) do |data|
       @team_players[i].player_name = data["Player Name"]
       @team_players[i].dominant_hand = data["Dominant Hand"]
       @team_players[i].bowling_style = data["Bowling Style"]

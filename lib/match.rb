@@ -12,15 +12,16 @@ class Match
   def initialize(team1, team2, no_of_overs)
     @self_team = Team.new(team1, :self_team)
     @opponent_team = Team.new(team2, :opponent_team)
-    @no_of_overs = no_of_overs
+    @no_of_overs = no_of_overs.to_i
     @overs_completed = 0
     @no_of_innings_played = 0
+    @overs = []
     intro
     toss
   end
 
   def intro
-    puts "Hello and welcome to the beatiful contest between the two great teams #{@self_team.upcase} and #{@opponent_team.upcase}!"
+    puts "Hello and welcome to the beatiful contest between the two great teams #{@self_team.name_of_team.upcase} and #{@opponent_team.name_of_team.upcase}!"
   end
 
   def toss
@@ -145,7 +146,7 @@ class Match
     @one_end_bowler.overs_bowled == 0.2*@no_of_overs
   end
 
-  def new_bowler(team)
+  def new_bowler
     @one_end_bowler.spell_completed(@bowlers)
     @one_end_bowler = @other_end_bowler
     @other_end_bowler = Bowler.new(@bowling_team)
@@ -159,10 +160,12 @@ class Match
 
   def initiate_play
     for i in 0...@no_of_overs
+      @single_over = []
       for j in 0...NO_OF_BALLS_IN_OVER
-        @overs[i][j] = Ball.new(@strike_batsman, @one_end_bowler, @overs_completed, @no_of_overs)
-        record(@overs[i][j])
+        @single_over[j] = Ball.new(@strike_batsman, @one_end_bowler, @overs_completed, @no_of_overs)
+        record(@single_over[j])
       end
+      @overs[i] = @single_over
       change_strike
       if spell_over? 
         new_bowler
@@ -174,20 +177,21 @@ class Match
   end
 
   def match_innings_close
-    if bowling_team.wickets != 10
+    if @wickets_taken != 10
       @strike_batsman.not_out(@batters)
       @non_strike_batsman.not_out(@batters)
     else
       @non_strike_batsman.not_out(@batters)
     end
-    write_to_file("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt")
+    write_to_file("../data/India vs Australia.txt")
+    #write_to_file("../data/#{@self_team.name_of_team.chomp.capitalize} vs #{@opponent_team.name_of_team.chomp.capitalize} on #{Time.now.to_s.chomp}")
   end
 
-  def write_to_file(file)
-    File.open(file, "w") do |file|
-      file.puts "SCORECARD------------ #{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize}"
-      file.puts "#{@batting_team.name_of_team} innings:"
-      file.puts "#{@batting_team_score} runs scored by #{batting_team.name_of_team.capitalize}\n"
+  def write_to_file(filee)
+    File.open(filee, "w") do |file|
+      file.puts "SCORECARD------------ #{@self_team.name_of_team.chomp.capitalize} vs #{@opponent_team.name_of_team.chomp.capitalize}"
+      file.puts "#{@batting_team.name_of_team.chomp} innings:"
+      file.puts "#{@batting_team_score} runs scored by #{@batting_team.name_of_team.chomp.capitalize}\n"
       @batters.each do |batsman|
         file.puts "#{batsman.player_name.capitalize}: #{batsman.score} runs off #{batsman.balls_played} balls, consisting of #{batsman.fours} fours and #{batsman.sixes} sixes."
       end

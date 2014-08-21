@@ -11,16 +11,16 @@ class Ball
     @batsman_skill = Integer((@batsman.front_foot_skill + @batsman.back_foot_skill)/2) + 1
     @bowler_skill = @bowler.bowling_skill
     @outcomes = []
+    # @@determine_probability = lambda { |probability, outcome|
+    #   if SecureRandom.random_number(100) < probability*100 
+    #     @outcomes.push(outcome)
+    #   end
+    # }
     @overs = overs
     @total_overs = total_overs
     determine_outcome
   end
 
-  @@determine_probability = lambda { |probability, outcome|
-    if SecureRandom.random_number(100) < probability*100 
-      @outcomes.push(outcome)
-    end
-  }
 
   def determine_outcome
     if @overs < 0.2*@total_overs 
@@ -34,12 +34,20 @@ class Ball
     else
       final_phase
     end
-    if @outcomes.size == 0 @outcomes.push(0)
-    @outcomes[SecureRandom.random_number(outcomes.size)]
+    if @outcomes.size == 0
+      @outcomes.push(0)
+    end
+    @outcomes[SecureRandom.random_number(@outcomes.size)]
   end
 
-  def bat_ball_prob(@batsman_skill, @bowler_skill)
-    @batsman_skill > @bowler_skill ? @batsman_skill/@bowler_skill.to_f : @bowler_skill/@batsman_skill.to_f
+  def det_prob(prob, outcome)
+    if SecureRandom.random_number(100) < prob*100
+      @outcomes.push(outcome)
+    end
+  end
+
+  def bat_ball_prob(batsman_skill, bowler_skill)
+    batsman_skill > bowler_skill ? batsman_skill/bowler_skill.to_f : bowler_skill/batsman_skill.to_f
   end
 
   def initial_phase
@@ -63,11 +71,11 @@ class Ball
   end
 
   def set_probability(dot, one, two, four, six, wicket)
-    @@determine_probability.call dot*bat_ball_prob(@batsman_skill, @bowler_skill), 0
-    @@determine_probability.call one*bat_ball_prob(@batsman_skill, @bowler_skill), 1
-    @@determine_probability.call two*bat_ball_prob(@batsman_skill, @bowler_skill), 2
-    @@determine_probability.call four*bat_ball_prob(@batsman_skill, @bowler_skill), 4
-    @@determine_probability.call six*bat_ball_prob(@batsman_skill, @bowler_skill), 6
-    @@determine_probability.call wicket*bat_ball_prob(@batsman_skill, @bowler_skill), "W"
+    det_prob(dot*bat_ball_prob(@batsman_skill, @bowler_skill), 0)
+    det_prob(one*bat_ball_prob(@batsman_skill, @bowler_skill), 1)
+    det_prob(two*bat_ball_prob(@batsman_skill, @bowler_skill), 2)
+    det_prob(four*bat_ball_prob(@batsman_skill, @bowler_skill), 4)
+    det_prob(six*bat_ball_prob(@batsman_skill, @bowler_skill), 6)
+    det_prob(wicket*bat_ball_prob(@batsman_skill, @bowler_skill), "W")
   end
 end
