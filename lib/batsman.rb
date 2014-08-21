@@ -17,6 +17,10 @@ class Batsman < Player
   	batters.push(self)
   end
 
+  def not_out(baters)
+    batter.push(self)
+  end
+
   def select_batsman(team)
     team.team_players.each do |player|
       if player.bat_status == :not_played

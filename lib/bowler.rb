@@ -6,4 +6,8 @@ class Bowler < Player
 
   	select_bowler(team) 
   end
+
+  def select_bowler
+  	
+  end
 end

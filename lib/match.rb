@@ -6,6 +6,7 @@ class Match
     @opponent_team = Team.new(team2, :opponent_team)
     @no_of_overs = no_of_overs
     @overs_completed = 0
+    @no_of_innings_played = 0
     intro
     toss
   end
@@ -56,6 +57,7 @@ class Match
     @batting_team = team
     @strike_batsman = Batsman.new(team)
     @non_strike_batsman = Batsman.new(team)
+    @no_of_innings_played += 1
     initiate_play
   end
 
@@ -149,6 +151,12 @@ class Match
   end
 
   def match_innings_close
+    if bowling_team.wickets != 10
+      @strike_batsman.not_out(@batters)
+      @non_strike_batsman.not_out(@batters)
+    else
+      @non_strike_batsman.not_out(@batters)
+    end
     write_to_file("../data/#{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize} on #{Time.now}.txt")
   end
 
@@ -156,6 +164,7 @@ class Match
     File.open(file, "w") do |file|
       file.puts "SCORECARD------------ #{@self_team.name_of_team.capitalize} vs #{@opponent_team.name_of_team.capitalize}"
       file.puts "#{@batting_team} innings:"
+      file.puts "#{@batting_team.team_score} runs scored by #{batting_team.capitalize}\n"
       @batters.each do |batsman|
         file.puts "#{batsman.player_name.capitalize}: #{batsman.score} runs off #{batsman.balls_played} balls, consisting of #{batsman.fours} fours and #{batsman.sixes} sixes."
       end
@@ -167,12 +176,19 @@ class Match
   end
 
   def change_innings
-    @batting_team.innings_over
-    @overs_completed = 0
     match_innings_close
-    @batting_team, @bowling_team = @bowling_team, @batting_team
-    bowl(@bowling_team)
-    bat(@batting_team)
+    if @no_of_innings_played == 2 
+      Match.close
+    else
+      @overs_completed = 0
+      @batting_team, @bowling_team = @bowling_team, @batting_team
+      bowl(@bowling_team)
+      bat(@batting_team)
+    end
+  end
+
+  def Match.close
+    puts "\n\nIt was a fun match for sure!"
   end
 end
 
