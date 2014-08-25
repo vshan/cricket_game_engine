@@ -10,3 +10,4 @@
 Add further teams
 Soft code the data files (or take input from user)
 Add further interaction / graphics
+Add proper sorting of bowlers
