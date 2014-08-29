@@ -1,4 +1,3 @@
-cricket_game_engine
-===================
+# Cricket Game Engine
 
-A game engine simulating the sport of cricket.
+A game engine simulating the sport of cricket. Also acts a research project to mathematically determine an exhaustive list of factors affecting a player's performance.
