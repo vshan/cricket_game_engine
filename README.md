@@ -12,4 +12,4 @@ Fork the repo or download the files and then using the command prompt, run the g
 $ ruby game.rb
 ```
 
-Rest should be fairly straightforward.
+Pick the teams and the number of overs. Rest should be fairly straightforward.
