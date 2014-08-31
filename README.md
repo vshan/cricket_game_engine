@@ -8,7 +8,7 @@ Built on Ruby, using a completely object oriented approach.
 
 ## Usage ##
 
-Fork the repo or download the files and then using the command prompt, run the game.rb file.
+Fork the repo or download the files and then using the command prompt, run the ```game.rb``` file.
 
 ```ruby
 $ ruby game.rb
