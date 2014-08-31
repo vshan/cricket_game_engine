@@ -11,11 +11,6 @@ class Ball
     @batsman_skill = Integer((@batsman.front_foot_skill + @batsman.back_foot_skill)/2) + 1
     @bowler_skill = @bowler.bowling_skill
     @outcomes = []
-    # @@determine_probability = lambda { |probability, outcome|
-    #   if SecureRandom.random_number(100) < probability*100 
-    #     @outcomes.push(outcome)
-    #   end
-    # }
     @overs = overs
     @total_overs = total_overs
     determine_outcome
