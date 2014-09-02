@@ -15,3 +15,5 @@ $ ruby game.rb
 ```
 
 Pick the teams and the number of overs. Rest should be fairly straightforward.
+
+Have fun!
