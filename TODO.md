@@ -15,3 +15,4 @@ Add proper sorting of bowlers
 Think of refactoring and using metaprogramming
 Think how data-structures would play a role
 Set up a deadlines
+Think about dynamic programming
