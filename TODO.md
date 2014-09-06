@@ -16,4 +16,4 @@ Think of refactoring and using metaprogramming
 Think how data-structures would play a role
 Set up a deadlines
 Think about dynamic programming (which comes under metaprogramming)
-Think how to make this code non-trivial
+Think how to make this code apply to a non-trivial problem
