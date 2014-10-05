@@ -19,4 +19,4 @@ Think about dynamic programming (which comes under metaprogramming)
 Think how to make this code apply to a non-trivial problem
 Add several abstractions
 Think of code maintenance 
-Algos
+Algos / DS
