@@ -168,6 +168,7 @@ class Match
         record(new_ball)
       end
       @overs << @single_over
+      print @single_over
       change_strike
       if spell_over? 
         new_bowler

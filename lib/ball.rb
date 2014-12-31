@@ -30,7 +30,7 @@ class Ball
       final_phase
     end
     if @outcomes.size == 0
-      @outcomes.push(0)
+      @outcomes << 0
     end
     @outcomes[SecureRandom.random_number(@outcomes.size)]
   end

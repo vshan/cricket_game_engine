@@ -1,11 +1,7 @@
 SCORECARD------------ India vs Australia
-India innings:
- runs scored by India
-Virendra sehwag: 0 runs off 60 balls, consisting of 0 fours and 0 sixes.
-Gautam gambhir: 0 runs off 60 balls, consisting of 0 fours and 0 sixes.
+Australia innings:
+ runs scored by Australia
+Aj finch: 0 runs off 0 balls, consisting of 0 fours and 0 sixes.
+David warner: 0 runs off 6 balls, consisting of 0 fours and 0 sixes.
 
 
-David Warner: 0 wickets off 4 overs, conceding 0 runs.
-AJ Finch: 0 wickets off 4 overs, conceding 0 runs.
-SR Watson: 0 wickets off 4 overs, conceding 0 runs.
-MS Wade: 0 wickets off 4 overs, conceding 0 runs.
