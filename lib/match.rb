@@ -160,13 +160,14 @@ class Match
   end
 
   def initiate_play
-    for i in 0...@no_of_overs
+    @no_of_overs.times do 
       @single_over = []
-      for j in 0...NO_OF_BALLS_IN_OVER
-        @single_over[j] = Ball.new(@strike_batsman, @one_end_bowler, @overs_completed, @no_of_overs)
-        record(@single_over[j])
+      NO_OF_BALLS_IN_OVER.times do
+        new_ball = Ball.new(@strike_batsman, @one_end_bowler, @overs_completed, @no_of_overs)
+        @singl_over << new_ball
+        record(new_ball)
       end
-      @overs[i] = @single_over
+      @overs << @single_over
       change_strike
       if spell_over? 
         new_bowler
