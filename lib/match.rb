@@ -164,7 +164,7 @@ class Match
       @single_over = []
       NO_OF_BALLS_IN_OVER.times do
         new_ball = Ball.new(@strike_batsman, @one_end_bowler, @overs_completed, @no_of_overs)
-        @singl_over << new_ball
+        @single_over << new_ball
         record(new_ball)
       end
       @overs << @single_over
