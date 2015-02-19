@@ -4,8 +4,8 @@ $: << File.dirname(File.absolute_path(__FILE__))
 require 'securerandom'
 require 'team'
 require 'ball'
-require 'player
-'require 'batsman'
+require 'player'
+require 'batsman'
 require 'bowler'
 
 class Match
