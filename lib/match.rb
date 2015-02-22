@@ -1,6 +1,5 @@
 $: << File.dirname(File.absolute_path(__FILE__))
 
-#Fix Logic
 require 'securerandom'
 require 'team'
 require 'ball'
