@@ -1,3 +1,6 @@
+# This file incorporates most of the algo logic
+# Consider refactoring it
+
 $: << File.dirname(File.absolute_path(__FILE__))
 
 require 'securerandom'
