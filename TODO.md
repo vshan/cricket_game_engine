@@ -20,3 +20,4 @@ Think how to make this code apply to a non-trivial problem
 Add several abstractions
 Think of code maintenance 
 Algos / DS
+Possibly create a Haskell clone?
