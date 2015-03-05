@@ -1,3 +1,5 @@
+# Search module
+
 module Search
   def take_options_from_file_return_array(file)
     file_options = []
