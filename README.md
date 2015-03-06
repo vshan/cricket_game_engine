@@ -4,7 +4,9 @@ A game engine simulating the sport of cricket. Also acts as a research project t
 
 The heart of the engine lies in the probability algorithms used in ```ball.rb ```.
 
-Built on Ruby, using a completely object oriented approach. 
+Built on Ruby, using a completely object oriented approach.
+
+Looking forward to porting it to Haskell, to try a purely functional approach :) 
 
 ## Usage ##
 
