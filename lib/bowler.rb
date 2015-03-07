@@ -1,5 +1,7 @@
 $: << File.dirname(File.absolute_path(__FILE__))
 
+# Bowler file
+
 require 'player'
 require 'team'
 
@@ -11,7 +13,7 @@ class Bowler < Player
     @wickets = 0
     @runs_conceded = 0
 
-  	select_bowler(team) 
+  	select_bowler(team)
   end
 
   def spell_completed(bowlers)
@@ -24,7 +26,7 @@ class Bowler < Player
         new_bowler(player)
         player.bowl_status = :played
         break
-      end 
+      end
   	end
   end
 
