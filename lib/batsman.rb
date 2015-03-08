@@ -1,3 +1,4 @@
+# BATSMAN file
 $: << File.dirname(File.absolute_path(__FILE__))
 
 require 'player'
