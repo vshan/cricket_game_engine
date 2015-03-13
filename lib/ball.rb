@@ -1,5 +1,4 @@
 # This file incorporates most of the algo logic
-# Consider refactoring it
 
 $: << File.dirname(File.absolute_path(__FILE__))
 
@@ -21,7 +20,7 @@ class Ball
 
 
   def determine_outcome
-    if @overs < 0.2*@total_overs 
+    if @overs < 0.2*@total_overs
       initial_phase
     elsif @overs >= 0.2*@total_overs && @overs < 0.4*@total_overs
       mid_initial_phase
@@ -49,7 +48,7 @@ class Ball
   end
 
   def initial_phase
-    set_probability(0.5, 0.5, 0.27, 0.2, 0.1, 0.31) 
+    set_probability(0.5, 0.5, 0.27, 0.2, 0.1, 0.31)
   end
 
   def mid_initial_phase
