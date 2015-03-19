@@ -1,6 +1,5 @@
 $: << File.dirname(File.absolute_path(__FILE__))
 
-# Bowler file
 
 require 'player'
 require 'team'
